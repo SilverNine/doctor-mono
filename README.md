@@ -3,6 +3,7 @@ It constantly scans and alerts you to every corner of your system.
 
 ## Tech Stack
 Backend : Spring Boot, JWT, QueryDSL
+
 Frontend : Vue, Vue Router, Vuex
 
 ## Author
