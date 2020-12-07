@@ -1,0 +1,40 @@
+# Maven template
+/target
+
+# Java
+*.class
+
+# Package Files
+*.jar
+
+# Dependency directories
+node_modules/
+/src/main/resources/static
+
+# Node
+package-lock.json
+yarn.lock
+.DS_Store
+node_modules
+/dist
+node/
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.iml
