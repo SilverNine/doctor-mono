@@ -8,13 +8,16 @@ Frontend : Vue, Vue Router, Vuex
 
 ## Author
 
-**Eungoo Jung**
+**Eungoo Jung (Develop)**
 
 * https://silvernine.me
 * https://portfolio.silvernine.me
 * https://github.com/silvernine
 
-**Namil Kim**
+**Namil Kim (Develop)**
+
+**Byeongkuk Jung (Design)**
+* http://www.behance.net/byeongkuk
 
 ## Copyright and license
 
