@@ -8,5 +8,9 @@ export default {
         } catch (err) {
             console.error(err)
         }
+    },
+    async getUserInfo () {
+        const loginResponse = await login.getUserInfo()
+        return loginResponse
     }
 }
