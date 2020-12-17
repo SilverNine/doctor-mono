@@ -12,13 +12,13 @@
                 </base-input>
             </div>
         </form>
-        <ul class="navbar-nav align-items-center d-none d-md-flex">
+        <!--<ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
                 <base-dropdown class="nav-link pr-0">
                     <div class="media align-items-center" slot="title">
-                <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="img/theme/team-4-800x800.jpg">
-                </span>
+                        <span class="avatar avatar-sm rounded-circle">
+                            <img alt="Image placeholder" src="img/theme/team-4-800x800.jpg">
+                        </span>
                         <div class="media-body ml-2 d-none d-lg-block">
                             <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
                         </div>
@@ -45,35 +45,43 @@
                             <span>Support</span>
                         </router-link>
                         <div class="dropdown-divider"></div>
-                        <router-link to="/profile" class="dropdown-item">
+                        <router-link onclick="handleLogout" class="dropdown-item">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
                         </router-link>
                     </template>
                 </base-dropdown>
             </li>
-        </ul>
+        </ul>-->
+        <base-button size="sm" type="secondary" class="my-4" @click.native.prevent="handleLogout">logout</base-button>
     </base-nav>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        activeNotifications: false,
-        showMenu: false,
-        searchQuery: ''
-      };
-    },
-    methods: {
-      toggleSidebar() {
-        this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
-      },
-      hideSidebar() {
-        this.$sidebar.displaySidebar(false);
-      },
-      toggleMenu() {
-        this.showMenu = !this.showMenu;
-      }
-    }
-  };
+    import {mapActions} from 'vuex'
+
+    export default {
+        data() {
+            return {
+                activeNotifications: false,
+                showMenu: false,
+                searchQuery: ''
+            };
+        },
+        methods: {
+            ...mapActions(['logout']),
+            handleLogout() {
+                this.logout();
+                this.$router.push("/login");
+            },
+            toggleSidebar() {
+                this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+            },
+            hideSidebar() {
+                this.$sidebar.displaySidebar(false);
+            },
+            toggleMenu() {
+                this.showMenu = !this.showMenu;
+            }
+        }
+    };
 </script>

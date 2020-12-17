@@ -1,5 +1,6 @@
 import {UID, IS_AUTH, ERROR_STATE} from './mutation_types'
 import api from '../service'
+import axios from "axios";
 
 let setUID = ({commit}, data) => {
     commit(UID, data)
@@ -32,5 +33,11 @@ export default {
         let loginResponse = await api.login(uid, password)
         processResponse(store, loginResponse)
         return store.getters.getIsAuth  // 로그인 결과를 리턴한다
+    },
+    logout(store) {
+        setUID(store, null)
+        setErrorState(store, '')
+        setIsAuth(store, false)
+        axios.defaults.headers.common['Authorization'] = ''
     }
 }
