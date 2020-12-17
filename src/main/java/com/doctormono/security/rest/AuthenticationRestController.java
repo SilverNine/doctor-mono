@@ -49,7 +49,7 @@ public class AuthenticationRestController {
       HttpHeaders httpHeaders = new HttpHeaders();
       httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
-      return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+      return new ResponseEntity<>(new JWTToken(jwt, loginDto.getUsername()), httpHeaders, HttpStatus.OK);
    }
 
    /**
@@ -57,19 +57,28 @@ public class AuthenticationRestController {
     */
    static class JWTToken {
 
-      private String idToken;
+      private String token;
+      private String username;
 
-      JWTToken(String idToken) {
-         this.idToken = idToken;
+      JWTToken(String token, String username) {
+         this.token = token;
+         this.username = username;
       }
 
-      @JsonProperty("id_token")
-      String getIdToken() {
-         return idToken;
+      public String getToken() {
+         return token;
       }
 
-      void setIdToken(String idToken) {
-         this.idToken = idToken;
+      public void setToken(String token) {
+         this.token = token;
+      }
+
+      public String getUsername() {
+         return username;
+      }
+
+      public void setUsername(String username) {
+         this.username = username;
       }
    }
 }

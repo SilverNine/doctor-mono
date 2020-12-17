@@ -23,9 +23,9 @@
                         <base-input class="input-group-alternative mb-3"
                                     placeholder="ID"
                                     addon-left-icon="ni ni-circle-08"
-                                    v-model="id"
+                                    v-model="uid"
                                     @keyup.enter.native="handleLogin"
-                                    :valid="validResult.id === 'ERROR' ? false : null"
+                                    :valid="validResult.uid === 'ERROR' ? false : null"
                         >
                         </base-input>
 
@@ -46,6 +46,9 @@
                             <base-button type="primary" class="my-4" @click.native.prevent="handleLogin">Sign in
                             </base-button>
                         </div>
+                        <div class="text-center" v-if="errorState">
+                            <badge type="warning">Warning</badge><br/><h5 class="text-red">Login Failed<br/>Please Check ID, Password</h5>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -62,20 +65,22 @@
 </template>
 <script>
     import { required } from 'vuelidate/lib/validators'
+    import { mapActions, mapGetters } from 'vuex'
+
     export default {
         name: 'login',
         data() {
             return {
-                id: '',
+                uid: '',
                 password: '',
                 validResult: {
-                    id: null,
+                    uid: null,
                     password: null
                 }
             }
         },
         validations: {
-            id: {
+            uid: {
                 required
             },
             password: {
@@ -83,25 +88,41 @@
             }
         },
         methods: {
-            handleLogin() {
+            ...mapActions(['login']),
+            async handleLogin() {
                 console.log("start login")
-                this.validResult.id = null
+                this.validResult.uid = null
                 this.validResult.password = null
                 this.$v.$touch()
                 if (this.$v.$invalid) {
                     console.log(this.$v);
-                    if(!this.$v.id.required) {
-                        this.validResult.id = 'ERROR'
+                    if(!this.$v.uid.required) {
+                        this.validResult.uid = 'ERROR'
                     }
 
                     if(!this.$v.password.required) {
                         this.validResult.password = 'ERROR'
                     }
                 } else {
-
-                    // do your submit logic here
+                    try {
+                        let loginResult = await this.login({uid: this.uid, password: this.password})
+                        console.log(loginResult) // 로그인 성공하면 true, 아니면 false
+                        if (loginResult) this.goToPages() // 페이지 이동!
+                    } catch (err) {
+                        console.error(err)
+                    }
                 }
+            },
+            goToPages () {
+                this.$router.push({
+                    name: 'dashboard'
+                })
             }
+        },
+        computed: {
+            ...mapGetters({
+                errorState: 'getErrorState'
+            })
         }
     }
 </script>

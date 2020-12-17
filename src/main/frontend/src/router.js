@@ -2,15 +2,24 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import DashboardLayout from '@/layout/DashboardLayout'
 import AuthLayout from '@/layout/AuthLayout'
+import store from '@/vuex/store'
+
 Vue.use(Router)
+
+const requireAuth = () => (from, to, next) => {
+  if (store.getters.getIsAuth) return next() // isAuth === true면 페이지 이동
+  next('/login') // isAuth === false면 다시 로그인 화면으로 이동
+}
 
 export default new Router({
   linkExactActiveClass: 'active',
+  mode: "history",
   routes: [
     {
       path: '/',
       redirect: 'dashboard',
       component: DashboardLayout,
+      beforeEnter: requireAuth(),
       children: [
         {
           path: '/dashboard',
