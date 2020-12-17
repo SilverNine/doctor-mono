@@ -90,12 +90,10 @@
         methods: {
             ...mapActions(['login']),
             async handleLogin() {
-                console.log("start login")
                 this.validResult.uid = null
                 this.validResult.password = null
                 this.$v.$touch()
                 if (this.$v.$invalid) {
-                    console.log(this.$v);
                     if(!this.$v.uid.required) {
                         this.validResult.uid = 'ERROR'
                     }
@@ -106,7 +104,6 @@
                 } else {
                     try {
                         let loginResult = await this.login({uid: this.uid, password: this.password})
-                        console.log(loginResult) // 로그인 성공하면 true, 아니면 false
                         if (loginResult) this.goToPages() // 페이지 이동!
                     } catch (err) {
                         console.error(err)
