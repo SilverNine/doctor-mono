@@ -151,8 +151,6 @@
     import SocialTrafficTable from './Dashboard/SocialTrafficTable';
     import PageVisitsTable from './Dashboard/PageVisitsTable';
 
-    import {mapActions} from 'vuex'
-
     export default {
         components: {
             LineChart,
@@ -186,7 +184,6 @@
             };
         },
         methods: {
-            ...mapActions(['getUserInfo']),
             initBigChart(index) {
                 let chartData = {
                     datasets: [
@@ -201,10 +198,8 @@
                 this.bigLineChart.activeIndex = index;
             }
         },
-        async mounted() {
+        mounted() {
             this.initBigChart(0)
-            let returnData = await this.getUserInfo()
-            console.log(returnData)
         }
     };
 </script>

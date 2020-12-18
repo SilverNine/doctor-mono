@@ -20,7 +20,7 @@
                             <img alt="Image placeholder" src="img/theme/team-4-800x800.jpg">
                         </span>
                         <div class="media-body ml-2 d-none d-lg-block">
-                            <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                            <span class="mb-0 text-sm  font-weight-bold">{{ nickname }}</span>
                         </div>
                     </div>
 
@@ -53,7 +53,6 @@
                 </base-dropdown>
             </li>
         </ul>
-        <!--<base-button size="sm" type="secondary" class="my-4" @click.native.prevent="handleLogout">logout</base-button>-->
     </base-nav>
 </template>
 <script>
@@ -62,13 +61,14 @@
     export default {
         data() {
             return {
+                nickname: '',
                 activeNotifications: false,
                 showMenu: false,
                 searchQuery: ''
             };
         },
         methods: {
-            ...mapActions(['logout']),
+            ...mapActions(['logout','getUserInfo']),
             handleLogout() {
                 this.logout();
                 this.$router.push("/login");
@@ -82,6 +82,10 @@
             toggleMenu() {
                 this.showMenu = !this.showMenu;
             }
+        },
+        async mounted() {
+            let returnData = await this.getUserInfo()
+            this.nickname = returnData.name
         }
     };
 </script>
