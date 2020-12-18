@@ -5,7 +5,6 @@
 const targetHost = "localhost"
 const targetPort = 8090
 const webpack = require('webpack');
-const isProd = process.env.NODE_ENV === "production";
 const port = 8080
 let cookie
 
@@ -23,7 +22,7 @@ module.exports = {
     ]
   },
   pwa: {
-    name: 'Vue Argon Dashboard',
+    name: 'DoctorMono',
     themeColor: '#172b4d',
     msTileColor: '#172b4d',
     appleMobileWebAppCapable: 'yes',

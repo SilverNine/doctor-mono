@@ -201,9 +201,10 @@
                 this.bigLineChart.activeIndex = index;
             }
         },
-        mounted() {
+        async mounted() {
             this.initBigChart(0)
-            console.log(this.getUserInfo())
+            let returnData = await this.getUserInfo()
+            console.log(returnData)
         }
     };
 </script>

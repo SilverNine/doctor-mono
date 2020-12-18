@@ -25,8 +25,7 @@ export default {
         try {
             return await axios.get('/api/person',{headers: authHeader()})
                 .then(response => {
-                console.log(response)
-                return response
+                return response.data
             }).catch(error => {
                 console.log(error)
             })
