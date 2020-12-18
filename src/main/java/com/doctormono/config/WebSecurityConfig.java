@@ -11,10 +11,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.CorsFilter;
-import com.doctormono.security.JwtAccessDeniedHandler;
-import com.doctormono.security.JwtAuthenticationEntryPoint;
-import com.doctormono.security.jwt.JWTConfigurer;
-import com.doctormono.security.jwt.TokenProvider;
+import com.doctormono.user.JwtAccessDeniedHandler;
+import com.doctormono.user.JwtAuthenticationEntryPoint;
+import com.doctormono.user.jwt.JWTConfigurer;
+import com.doctormono.user.jwt.TokenProvider;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          );
    }
 
-   // Configure security settings ===========================================================================
+   // Configure user settings ===========================================================================
 
    @Override
    protected void configure(HttpSecurity httpSecurity) throws Exception {
