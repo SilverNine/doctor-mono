@@ -2,20 +2,17 @@ import axios from 'axios'
 import authHeader from './authHeader'
 
 export default {
-    async login (uid, password) {
+    async login (username, password) {
         try {
             return await axios.post('/api/authenticate',{
-                'username': uid,
+                'username': username,
                 'password': password
             }).then(response => {
-                console.log(response)
                 if (!response.data.token) {
                     return 'noAuth'
                 }
 
-                localStorage.setItem('user', JSON.stringify(response.data));
-
-                return response
+                return response.data
             }).catch(error => {
                 console.log(error)
                 return 'noAuth'

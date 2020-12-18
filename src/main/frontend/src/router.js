@@ -7,6 +7,7 @@ import store from '@/vuex/store'
 Vue.use(Router)
 
 const requireAuth = () => (from, to, next) => {
+  console.log(store)
   if (store.getters.getIsAuth) return next() // isAuth === true면 페이지 이동
   next('/login') // isAuth === false면 다시 로그인 화면으로 이동
 }

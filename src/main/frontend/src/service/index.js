@@ -1,16 +1,20 @@
 import login from './login'
 
 export default {
-    async login (uid, password) {
+    async login (username, password) {
         try {
-            const loginResponse = await login.login(uid, password)
+            const loginResponse = await login.login(username, password)
             return loginResponse
         } catch (err) {
             console.error(err)
         }
     },
     async getUserInfo () {
-        const loginResponse = await login.getUserInfo()
-        return loginResponse
+        try {
+            const loginResponse = await login.getUserInfo()
+            return loginResponse
+        } catch (err) {
+            console.error(err)
+        }
     }
 }

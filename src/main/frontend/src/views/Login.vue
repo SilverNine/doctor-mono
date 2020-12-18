@@ -23,9 +23,9 @@
                         <base-input class="input-group-alternative mb-3"
                                     placeholder="ID"
                                     addon-left-icon="ni ni-circle-08"
-                                    v-model="uid"
+                                    v-model="username"
                                     @keyup.enter.native="handleLogin"
-                                    :valid="validResult.uid === 'ERROR' ? false : null"
+                                    :valid="validResult.username === 'ERROR' ? false : null"
                         >
                         </base-input>
 
@@ -71,16 +71,16 @@
         name: 'login',
         data() {
             return {
-                uid: '',
+                username: '',
                 password: '',
                 validResult: {
-                    uid: null,
+                    username: null,
                     password: null
                 }
             }
         },
         validations: {
-            uid: {
+            username: {
                 required
             },
             password: {
@@ -90,12 +90,12 @@
         methods: {
             ...mapActions(['login']),
             async handleLogin() {
-                this.validResult.uid = null
+                this.validResult.username = null
                 this.validResult.password = null
                 this.$v.$touch()
                 if (this.$v.$invalid) {
-                    if(!this.$v.uid.required) {
-                        this.validResult.uid = 'ERROR'
+                    if(!this.$v.username.required) {
+                        this.validResult.username = 'ERROR'
                     }
 
                     if(!this.$v.password.required) {
@@ -103,7 +103,7 @@
                     }
                 } else {
                     try {
-                        let loginResult = await this.login({uid: this.uid, password: this.password})
+                        let loginResult = await this.login({username: this.username, password: this.password})
                         if (loginResult) this.goToPages() // 페이지 이동!
                     } catch (err) {
                         console.error(err)

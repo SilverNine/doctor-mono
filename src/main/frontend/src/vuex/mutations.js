@@ -1,13 +1,14 @@
-import * as types from './mutation_types'
-
 export default {
-    [types.UID] (state, uid) {
-        state.uid = uid
+    USERNAME (state, username) {
+        state.username = username
     },
-    [types.ERROR_STATE] (state, errorState) {
+    ERROR_STATE (state, errorState) {
         state.errorState = errorState
     },
-    [types.IS_AUTH] (state, isAuth) {
+    IS_AUTH (state, isAuth) {
         state.isAuth = isAuth
-    }
+    },
+    TOKEN (state, token) {
+        state.token = token
+    },
 }

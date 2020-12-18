@@ -12,7 +12,7 @@
                 </base-input>
             </div>
         </form>
-        <!--<ul class="navbar-nav align-items-center d-none d-md-flex">
+        <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
                 <base-dropdown class="nav-link pr-0">
                     <div class="media align-items-center" slot="title">
@@ -45,15 +45,15 @@
                             <span>Support</span>
                         </router-link>
                         <div class="dropdown-divider"></div>
-                        <router-link onclick="handleLogout" class="dropdown-item">
+                        <router-link to="/" v-on:click.native="handleLogout" class="dropdown-item">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
                         </router-link>
                     </template>
                 </base-dropdown>
             </li>
-        </ul>-->
-        <base-button size="sm" type="secondary" class="my-4" @click.native.prevent="handleLogout">logout</base-button>
+        </ul>
+        <!--<base-button size="sm" type="secondary" class="my-4" @click.native.prevent="handleLogout">logout</base-button>-->
     </base-nav>
 </template>
 <script>
