@@ -1,5 +1,5 @@
 import userApi from '../api/user'
-import * as types from '../mutation_types'
+import * as types from './mutation_types'
 
 // initial state
 const state = {
