@@ -1,8 +1,8 @@
 export default function authHeader() {
-    let store = JSON.parse(localStorage.getItem('vuex'));
+    let user = JSON.parse(localStorage.getItem('vuex')).user;
 
-    if (store && store.token) {
-        return { Authorization: 'Bearer ' + store.token };
+    if (user && user.token) {
+        return { Authorization: 'Bearer ' + user.token };
     } else {
         return {};
     }

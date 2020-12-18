@@ -1,4 +1,4 @@
-import api from '../service'
+import api from '../../service'
 
 let setUsername = ({commit}, data) => {
     commit('USERNAME', data)
@@ -31,19 +31,16 @@ export default {
                 setIsAuth(store, true)
         }
 
-        // let userInfo = await api.getUserInfo();
-        // console.log(userInfo);
-
         return store.getters.getIsAuth  // 로그인 결과를 리턴한다
     },
     async logout(store) {
-        // let userInfo = await api.getUserInfo();
-        // console.log(userInfo);
-
         setUsername(store, '')
         setToken(store, '')
         setErrorState(store, '')
         setIsAuth(store, false)
         localStorage.removeItem('vuex');
+    },
+    async getUserInfo() {
+        return await api.getUserInfo();
     }
 }
