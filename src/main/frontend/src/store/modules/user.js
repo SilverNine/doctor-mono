@@ -1,4 +1,5 @@
 import userApi from '../api/user'
+import * as types from '../mutation_types'
 
 // initial state
 const state = {
@@ -17,44 +18,28 @@ const getters = {
 }
 
 // initial actions
-let setUsername = ({commit}, data) => {
-    commit('USERNAME', data)
-}
-
-let setErrorState = ({commit}, data) => {
-    commit('ERROR_STATE', data)
-}
-
-let setIsAuth = ({commit}, data) => {
-    commit('IS_AUTH', data)
-}
-
-let setToken = ({commit}, data) => {
-    commit('TOKEN', data)
-}
-
 const actions = {
     async login (store, {username, password}) {
         let loginResponse = await userApi.login(username, password)
         switch (loginResponse) {
             case 'noAuth':
-                setErrorState(store, 'Wrong ID or Password')
-                setIsAuth(store, false)
+                store.commit(types.ERROR_STATE, 'Wrong ID or Password')
+                store.commit(types.IS_AUTH, false)
                 break
             default:
-                setUsername(store, loginResponse.username)
-                setToken(store, loginResponse.token)
-                setErrorState(store, '')
-                setIsAuth(store, true)
+                store.commit(types.USERNAME, loginResponse.username)
+                store.commit(types.TOKEN, loginResponse.token)
+                store.commit(types.ERROR_STATE, '')
+                store.commit(types.IS_AUTH, true)
         }
 
         return store.getters.getIsAuth  // 로그인 결과를 리턴한다
     },
     async logout(store) {
-        setUsername(store, '')
-        setToken(store, '')
-        setErrorState(store, '')
-        setIsAuth(store, false)
+        store.commit(types.USERNAME, '')
+        store.commit(types.TOKEN, '')
+        store.commit(types.ERROR_STATE, '')
+        store.commit(types.IS_AUTH, false)
         localStorage.removeItem('vuex');
     },
     async getUserInfo() {
@@ -64,16 +49,16 @@ const actions = {
 
 // initial mutation
 const mutations = {
-    USERNAME (state, username) {
+    [types.USERNAME] (state, username) {
         state.username = username
     },
-    ERROR_STATE (state, errorState) {
+    [types.ERROR_STATE] (state, errorState) {
         state.errorState = errorState
     },
-    IS_AUTH (state, isAuth) {
+    [types.IS_AUTH] (state, isAuth) {
         state.isAuth = isAuth
     },
-    TOKEN (state, token) {
+    [types.TOKEN] (state, token) {
         state.token = token
     },
 }
