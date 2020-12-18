@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import User from './user'
+import User from './modules/user'
 
 Vue.use(Vuex)
 

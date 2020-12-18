@@ -1,4 +1,4 @@
-import api from '../../service'
+import userApi from '../../api/user'
 
 let setUsername = ({commit}, data) => {
     commit('USERNAME', data)
@@ -18,7 +18,7 @@ let setToken = ({commit}, data) => {
 
 export default {
     async login (store, {username, password}) {
-        let loginResponse = await api.login(username, password)
+        let loginResponse = await userApi.login(username, password)
         switch (loginResponse) {
             case 'noAuth':
                 setErrorState(store, 'Wrong ID or Password')
@@ -41,6 +41,6 @@ export default {
         localStorage.removeItem('vuex');
     },
     async getUserInfo() {
-        return await api.getUserInfo();
+        return await userApi.getUserInfo();
     }
 }
