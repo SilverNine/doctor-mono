@@ -39,9 +39,9 @@
                         >
                         </base-input>
 
-                        <base-checkbox class="custom-control-alternative">
+                        <!--<base-checkbox class="custom-control-alternative">
                             <span class="text-muted">Remember me</span>
-                        </base-checkbox>
+                        </base-checkbox>-->
                         <div class="text-center">
                             <base-button type="primary" class="my-4" @click.native.prevent="handleLogin">Sign in
                             </base-button>
