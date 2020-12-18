@@ -1,6 +1,7 @@
 package com.doctormono.user.rest;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminProtectedRestController {
 
    @GetMapping("/hiddenmessage")
+   //@PreAuthorize("hasAnyRole('ADMIN')")
    public ResponseEntity<HiddenMessage> getAdminProtectedGreeting() {
       return ResponseEntity.ok(new HiddenMessage("this is a hidden message!"));
    }

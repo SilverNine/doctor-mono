@@ -1,6 +1,7 @@
 package com.doctormono.user.rest;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonRestController {
 
    @GetMapping("/person")
+   //@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
    public ResponseEntity<Person> getPerson() {
       return ResponseEntity.ok(new Person("John Doe", "john.doe@test.org"));
    }

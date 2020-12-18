@@ -49,7 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
    public void configure(WebSecurity web) {
       web.ignoring()
          .antMatchers(
-            "/",
             "/favicon.ico",
             "/**/*.html",
             "/**/*.woff2",
@@ -57,7 +56,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/**/*.css",
             "/**/*.js",
             "/img/**",
-            "/h2-console/**"
+            "/fonts/**",
+            "/h2-console/**",
+            "/*"
          );
    }
 
@@ -88,7 +89,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
               .and()
               .authorizeRequests()
-              .antMatchers("/").permitAll()
               .antMatchers("/api/authenticate").permitAll()
               .antMatchers("/api/person").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
               .antMatchers("/api/hiddenmessage").hasAuthority("ROLE_ADMIN")
