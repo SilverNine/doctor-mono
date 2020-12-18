@@ -5,27 +5,28 @@
               expand>
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <div class="form-group mb-0">
-                <base-input placeholder="Search"
+                <!--<base-input placeholder="Search"
                             class="input-group-alternative"
                             alternative=""
                             addon-right-icon="fas fa-search">
-                </base-input>
+                </base-input>-->
             </div>
         </form>
         <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
                 <base-dropdown class="nav-link pr-0">
                     <div class="media align-items-center" slot="title">
-                        <span class="avatar avatar-sm rounded-circle">
+                        <!--<span class="avatar avatar-sm rounded-circle">
                             <img alt="Image placeholder" src="img/theme/team-4-800x800.jpg">
-                        </span>
+                        </span>-->
                         <div class="media-body ml-2 d-none d-lg-block">
-                            <span class="mb-0 text-sm  font-weight-bold">{{ nickname }}</span>
+                            <i class="ni ni-button-power"></i>
+                            <span class="mb-0 text-sm  font-weight-bold"> {{ nickname }}</span>
                         </div>
                     </div>
 
                     <template>
-                        <div class=" dropdown-header noti-title">
+                        <!--<div class=" dropdown-header noti-title">
                             <h6 class="text-overflow m-0">Welcome!</h6>
                         </div>
                         <router-link to="/profile" class="dropdown-item">
@@ -44,7 +45,7 @@
                             <i class="ni ni-support-16"></i>
                             <span>Support</span>
                         </router-link>
-                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider"></div>-->
                         <router-link to="/" v-on:click.native="handleLogout" class="dropdown-item">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
@@ -68,7 +69,7 @@
             };
         },
         methods: {
-            ...mapActions(['logout','getUserInfo']),
+            ...mapActions(['logout','getUsername']),
             handleLogout() {
                 this.logout();
                 this.$router.push("/login");
@@ -84,8 +85,7 @@
             }
         },
         async mounted() {
-            let returnData = await this.getUserInfo()
-            this.nickname = returnData.name
+            this.nickname = await this.getUsername()
         }
     };
 </script>

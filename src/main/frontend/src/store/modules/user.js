@@ -44,6 +44,9 @@ const actions = {
     },
     async getUserInfo() {
         return await userApi.getUserInfo();
+    },
+    async getUsername(store) {
+        return await store.getters.getUsername
     }
 }
 

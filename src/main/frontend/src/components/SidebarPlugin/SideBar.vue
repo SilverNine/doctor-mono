@@ -12,7 +12,7 @@
 
             <slot name="mobile-right">
                 <ul class="nav align-items-center d-md-none">
-                    <base-dropdown class="nav-item" position="right">
+                    <!--<base-dropdown class="nav-item" position="right">
                         <a slot="title" class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="ni ni-bell-55"></i>
@@ -22,17 +22,21 @@
                         <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
-                    </base-dropdown>
+                    </base-dropdown>-->
                     <base-dropdown class="nav-item" position="right">
                         <a slot="title" class="nav-link" href="#" role="button">
                             <div class="media align-items-center">
-                              <span class="avatar avatar-sm rounded-circle">
-                                <img alt="Image placeholder" src="img/theme/team-1-800x800.jpg">
-                              </span>
+                                <!--<span class="avatar avatar-sm rounded-circle">
+                                  <img alt="Image placeholder" src="img/theme/team-1-800x800.jpg">
+                                </span>-->
+                                <span>
+                                    <i class="ni ni-button-power"></i>
+                                    <span class="mb-0 text-sm font-weight-bold"> {{ nickname }}</span>
+                                </span>
                             </div>
                         </a>
 
-                        <div class=" dropdown-header noti-title">
+                        <!--<div class=" dropdown-header noti-title">
                             <h6 class="text-overflow m-0">Welcome!</h6>
                         </div>
                         <router-link to="/profile" class="dropdown-item">
@@ -51,7 +55,7 @@
                             <i class="ni ni-support-16"></i>
                             <span>Support</span>
                         </router-link>
-                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider"></div>-->
                         <a href="#!" v-on:click="handleLogout" class="dropdown-item">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
@@ -79,11 +83,8 @@
                     <slot name="links">
                     </slot>
                 </ul>
-                <!--Divider-->
                 <hr class="my-3">
-                <!--Heading-->
                 <h6 class="navbar-heading text-muted">Documentation</h6>
-                <!--Navigation-->
                 <ul class="navbar-nav mb-md-3">
                     <li class="nav-item">
                         <a class="nav-link"
@@ -134,11 +135,16 @@
                 autoClose: this.autoClose
             };
         },
+        data() {
+            return {
+                nickname: '',
+            };
+        },
         methods: {
-            ...mapActions(['logout']),
+            ...mapActions(['logout','getUsername']),
             handleLogout() {
-                this.logout();
-                this.$router.push("/login");
+                this.logout()
+                this.$router.push("/login")
             },
             closeSidebar() {
                 this.$sidebar.displaySidebar(false)
@@ -149,8 +155,11 @@
         },
         beforeDestroy() {
             if (this.$sidebar.showSidebar) {
-                this.$sidebar.showSidebar = false;
+                this.$sidebar.showSidebar = false
             }
+        },
+        async mounted() {
+            this.nickname = await this.getUsername()
         }
     };
 </script>
