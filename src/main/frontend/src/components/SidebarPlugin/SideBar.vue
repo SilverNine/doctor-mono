@@ -52,7 +52,7 @@
                             <span>Support</span>
                         </router-link>
                         <div class="dropdown-divider"></div>
-                        <a href="#!" class="dropdown-item">
+                        <a href="#!" v-on:click="handleLogout" class="dropdown-item">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
                         </a>
@@ -105,46 +105,52 @@
                     </li>
                 </ul>
             </div>
-            </div>
+        </div>
     </nav>
 </template>
 <script>
-  import NavbarToggleButton from '@/components/NavbarToggleButton'
+    import NavbarToggleButton from '@/components/NavbarToggleButton'
+    import {mapActions} from 'vuex'
 
-  export default {
-    name: 'sidebar',
-    components: {
-      NavbarToggleButton
-    },
-    props: {
-      logo: {
-        type: String,
-        default: 'img/brand/blue.png',
-        description: 'Sidebar app logo'
-      },
-      autoClose: {
-        type: Boolean,
-        default: true,
-        description: 'Whether sidebar should autoclose on mobile when clicking an item'
-      }
-    },
-    provide() {
-      return {
-        autoClose: this.autoClose
-      };
-    },
-    methods: {
-      closeSidebar() {
-        this.$sidebar.displaySidebar(false)
-      },
-      showSidebar() {
-        this.$sidebar.displaySidebar(true)
-      }
-    },
-    beforeDestroy() {
-      if (this.$sidebar.showSidebar) {
-        this.$sidebar.showSidebar = false;
-      }
-    }
-  };
+    export default {
+        name: 'sidebar',
+        components: {
+            NavbarToggleButton
+        },
+        props: {
+            logo: {
+                type: String,
+                default: 'img/brand/blue.png',
+                description: 'Sidebar app logo'
+            },
+            autoClose: {
+                type: Boolean,
+                default: true,
+                description: 'Whether sidebar should autoclose on mobile when clicking an item'
+            }
+        },
+        provide() {
+            return {
+                autoClose: this.autoClose
+            };
+        },
+        methods: {
+            ...mapActions(['logout']),
+            handleLogout() {
+                this.logout();
+                this.$router.push("/login");
+            },
+            closeSidebar() {
+                this.$sidebar.displaySidebar(false)
+            },
+            showSidebar() {
+                this.$sidebar.displaySidebar(true)
+            }
+        },
+        beforeDestroy() {
+            if (this.$sidebar.showSidebar) {
+                this.$sidebar.showSidebar = false;
+            }
+        }
+    };
 </script>
